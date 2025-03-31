@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quebre o Ovo e Ganhe Desconto!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f0e3;
+            flex-direction: column;
+        }
+        #egg {
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #egg:active {
+            transform: scale(0.95);
+        }
+        #coupon {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4af37;
+            color: white;
+            font-size: 20px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <img id="egg" src="ovo.png" alt="Ovo" onclick="breakEgg()">
+    <div id="coupon"></div>
+    
+    <script>
+        let foundCoupon = false;
+        
+        function breakEgg() {
+            if (foundCoupon) return; // Impede que o usuário quebre o ovo mais de uma vez
+            
+            let egg = document.getElementById("egg");
+            let coupon = document.getElementById("coupon");
+            
+            let coupons = ["PSC10", "PSC05", "PSC15", "PSCFRTGRATIS"];
+            let randomCoupon = coupons[Math.floor(Math.random() * coupons.length)];
+            
+            egg.src = "ovo quebrado.png"; // Troca para a imagem do ovo quebrado
+            coupon.innerText = `CUPOM: ${randomCoupon}`; // Define um cupom aleatório
+            coupon.style.display = "block"; // Exibe o cupom
+            
+            setTimeout(() => coupon.style.opacity = "1", 50);
+            foundCoupon = true; // Marca que o cupom já foi encontrado
+        }
+    </script>
+</body>
+</html>
